@@ -2,10 +2,10 @@ import { z } from "zod";
 
 export const preferencesSchema = z.object({
   // Préférence genre parrain
-  genre_parrain: z.enum(["homme", "femme", "peu_importe"]),
+  genreParrain: z.enum(["homme", "femme", "peu_importe"]),
 
   // Type de relation souhaitée
-  type_relation: z.enum([
+  typeRelation: z.enum([
     "mentor_academique", // Aide pour les cours
     "guide_social", // Intégration, événements
     "conseiller_carriere", // Orientation professionnelle
@@ -13,7 +13,7 @@ export const preferencesSchema = z.object({
   ]),
 
   // Fréquence de contact souhaitée
-  frequence_contact: z.enum([
+  frequenceContact: z.enum([
     "quotidien",
     "plusieurs_fois_semaine",
     "hebdomadaire",
@@ -21,7 +21,7 @@ export const preferencesSchema = z.object({
   ]),
 
   // Mode de communication préféré
-  mode_communication: z.enum([
+  modeCommunication: z.enum([
     "whatsapp",
     "rencontre_physique",
     "appels",
@@ -32,5 +32,5 @@ export const preferencesSchema = z.object({
   commentaires: z.string().max(200).optional(),
 
   // Conditions
-  accepte_conditions: z.literal(true),
+  accepteConditions: z.literal(true),
 });

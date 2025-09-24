@@ -27,7 +27,7 @@ export const matchingSchema = z.object({
   personnalite: z.enum(["extraverti", "introverti", "equilibre"]),
 
   // Domaines d'intérêt en MIAGE
-  specialisation_interesse: z
+  specialisationInteresse: z
     .array(
       z.enum([
         "developpement_web",
@@ -43,7 +43,7 @@ export const matchingSchema = z.object({
     .min(1, "Sélectionnez au moins un domaine"),
 
   // Objectifs académiques
-  objectifs_etudes: z
+  objectifsEtudes: z
     .array(
       z.enum([
         "avoir_mention",
@@ -58,7 +58,7 @@ export const matchingSchema = z.object({
     .min(1, "Sélectionnez au moins un objectif"),
 
   // Style d'apprentissage
-  style_apprentissage: z.enum([
+  styleApprentissage: z.enum([
     "pratique_hands_on",
     "theorique_conceptuel",
     "groupe_collaboratif",
@@ -66,7 +66,7 @@ export const matchingSchema = z.object({
   ]),
 
   // Niveau technique actuel
-  niveau_technique: z.enum([
+  niveauTechnique: z.enum([
     "debutant",
     "quelques_bases",
     "intermediaire",
@@ -74,7 +74,7 @@ export const matchingSchema = z.object({
   ]),
 
   // Participation associative
-  participation_asso: z.enum([
+  participationAsso: z.enum([
     "tres_actif",
     "occasionnel",
     "observateur",
@@ -82,7 +82,7 @@ export const matchingSchema = z.object({
   ]),
 
   // Attentes du parrainage
-  attentes_parrainage: z
+  attentesParrainage: z
     .string()
     .min(20, "Décrivez vos attentes (minimum 20 caractères)")
     .max(300, "Maximum 300 caractères"),

@@ -25,9 +25,9 @@ type MatchingInfoData = z.infer<typeof matchingSchema>;
 // Extraire les types des énumérations du schéma Zod
 type Hobby = z.infer<typeof matchingSchema.shape.hobbies.element>;
 type Specialisation = z.infer<
-  typeof matchingSchema.shape.specialisation_interesse.element
+  typeof matchingSchema.shape.specialisationInteresse.element
 >;
-type Objectif = z.infer<typeof matchingSchema.shape.objectifs_etudes.element>;
+type Objectif = z.infer<typeof matchingSchema.shape.objectifsEtudes.element>;
 
 interface MatchingInfoFormProps {
   onNext: (data: MatchingInfoData) => void;
@@ -118,8 +118,8 @@ export default function MatchingInfoForm({
     resolver: zodResolver(matchingSchema),
     defaultValues: {
       hobbies: [],
-      specialisation_interesse: [],
-      objectifs_etudes: [],
+      specialisationInteresse: [],
+      objectifsEtudes: [],
       ...initialData,
     },
   });
@@ -128,7 +128,7 @@ export default function MatchingInfoForm({
     onNext(data);
   };
 
-  const attentesValue = watch("attentes_parrainage") || "";
+  const attentesValue = watch("attentesParrainage") || "";
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -257,7 +257,7 @@ export default function MatchingInfoForm({
               </CardHeader>
               <CardContent>
                 <Controller
-                  name="style_apprentissage"
+                  name="styleApprentissage"
                   control={control}
                   render={({ field }) => (
                     <RadioGroup
@@ -285,9 +285,9 @@ export default function MatchingInfoForm({
                     </RadioGroup>
                   )}
                 />
-                {errors.style_apprentissage && (
+                {errors.styleApprentissage && (
                   <p className="text-sm text-red-600 mt-2">
-                    {errors.style_apprentissage.message}
+                    {errors.styleApprentissage.message}
                   </p>
                 )}
               </CardContent>
@@ -304,7 +304,7 @@ export default function MatchingInfoForm({
             </CardHeader>
             <CardContent>
               <Controller
-                name="specialisation_interesse"
+                name="specialisationInteresse"
                 control={control}
                 render={({ field }) => (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -340,9 +340,9 @@ export default function MatchingInfoForm({
                   </div>
                 )}
               />
-              {errors.specialisation_interesse && (
+              {errors.specialisationInteresse && (
                 <p className="text-sm text-red-600 mt-2">
-                  {errors.specialisation_interesse.message}
+                  {errors.specialisationInteresse.message}
                 </p>
               )}
             </CardContent>
@@ -358,7 +358,7 @@ export default function MatchingInfoForm({
             </CardHeader>
             <CardContent>
               <Controller
-                name="objectifs_etudes"
+                name="objectifsEtudes"
                 control={control}
                 render={({ field }) => (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -394,9 +394,9 @@ export default function MatchingInfoForm({
                   </div>
                 )}
               />
-              {errors.objectifs_etudes && (
+              {errors.objectifsEtudes && (
                 <p className="text-sm text-red-600 mt-2">
-                  {errors.objectifs_etudes.message}
+                  {errors.objectifsEtudes.message}
                 </p>
               )}
             </CardContent>
@@ -414,7 +414,7 @@ export default function MatchingInfoForm({
               </CardHeader>
               <CardContent>
                 <Controller
-                  name="niveau_technique"
+                  name="niveauTechnique"
                   control={control}
                   render={({ field }) => (
                     <RadioGroup
@@ -442,9 +442,9 @@ export default function MatchingInfoForm({
                     </RadioGroup>
                   )}
                 />
-                {errors.niveau_technique && (
+                {errors.niveauTechnique && (
                   <p className="text-sm text-red-600 mt-2">
-                    {errors.niveau_technique.message}
+                    {errors.niveauTechnique.message}
                   </p>
                 )}
               </CardContent>
@@ -460,7 +460,7 @@ export default function MatchingInfoForm({
               </CardHeader>
               <CardContent>
                 <Controller
-                  name="participation_asso"
+                  name="participationAsso"
                   control={control}
                   render={({ field }) => (
                     <RadioGroup
@@ -488,9 +488,9 @@ export default function MatchingInfoForm({
                     </RadioGroup>
                   )}
                 />
-                {errors.participation_asso && (
+                {errors.participationAsso && (
                   <p className="text-sm text-red-600 mt-2">
-                    {errors.participation_asso.message}
+                    {errors.participationAsso.message}
                   </p>
                 )}
               </CardContent>
@@ -511,27 +511,27 @@ export default function MatchingInfoForm({
             </CardHeader>
             <CardContent>
               <Controller
-                name="attentes_parrainage"
+                name="attentesParrainage"
                 control={control}
                 render={({ field }) => (
                   <Textarea
                     {...field}
                     placeholder="Exemple: J'aimerais avoir des conseils sur les projets à réaliser, de l'aide pour comprendre certains concepts difficiles, et des conseils d'orientation pour la suite de mes études..."
                     rows={4}
-                    className={`resize-none ${errors.attentes_parrainage ? "border-red-500" : ""}`}
+                    className={`resize-none ${errors.attentesParrainage ? "border-red-500" : ""}`}
                   />
                 )}
               />
               <div className="flex justify-between text-xs mt-2">
                 <span
                   className={
-                    errors.attentes_parrainage
+                    errors.attentesParrainage
                       ? "text-red-600"
                       : "text-gray-500"
                   }
                 >
-                  {errors.attentes_parrainage
-                    ? errors.attentes_parrainage.message
+                  {errors.attentesParrainage
+                    ? errors.attentesParrainage.message
                     : ""}
                 </span>
                 <span className="text-gray-500">

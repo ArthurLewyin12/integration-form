@@ -30,9 +30,9 @@ interface PreferencesFormProps {
 }
 
 const genreParrainOptions = [
-  { value: "homme", label: "Homme", icon: "👨" },
-  { value: "femme", label: "Femme", icon: "👩" },
-  { value: "peu_importe", label: "Peu importe", icon: "🤝" },
+  { value: "homme", label: "Homme" },
+  { value: "femme", label: "Femme" },
+  { value: "peu_importe", label: "Peu importe" },
 ];
 
 const typeRelationOptions = [
@@ -40,48 +40,39 @@ const typeRelationOptions = [
     value: "mentor_academique",
     label: "Mentor académique",
     description: "Aide pour les cours et études",
-    icon: "📚",
-    color: "bg-blue-50 border-blue-200 hover:bg-blue-100",
   },
   {
     value: "guide_social",
     label: "Guide social",
     description: "Intégration et événements",
-    icon: "🎉",
-    color: "bg-green-50 border-green-200 hover:bg-green-100",
   },
   {
     value: "conseiller_carriere",
     label: "Conseiller carrière",
     description: "Orientation professionnelle",
-    icon: "💼",
-    color: "bg-purple-50 border-purple-200 hover:bg-purple-100",
   },
   {
     value: "ami_senior",
     label: "Ami senior",
     description: "Relation décontractée",
-    icon: "😊",
-    color: "bg-orange-50 border-orange-200 hover:bg-orange-100",
   },
 ];
 
 const frequenceContactOptions = [
-  { value: "quotidien", label: "Quotidien", icon: "⚡" },
+  { value: "quotidien", label: "Quotidien" },
   {
     value: "plusieurs_fois_semaine",
     label: "Plusieurs fois/semaine",
-    icon: "📅",
   },
-  { value: "hebdomadaire", label: "Hebdomadaire", icon: "📆" },
-  { value: "selon_besoins", label: "Selon les besoins", icon: "🔔" },
+  { value: "hebdomadaire", label: "Hebdomadaire" },
+  { value: "selon_besoins", label: "Selon les besoins" },
 ];
 
 const modeCommunicationOptions = [
-  { value: "whatsapp", label: "WhatsApp", icon: "💬" },
-  { value: "rencontre_physique", label: "Rencontres physiques", icon: "🤝" },
-  { value: "appels", label: "Appels téléphoniques", icon: "📞" },
-  { value: "mixte", label: "Mixte (tous les moyens)", icon: "🌐" },
+  { value: "whatsapp", label: "WhatsApp" },
+  { value: "rencontre_physique", label: "Rencontres physiques" },
+  { value: "appels", label: "Appels téléphoniques" },
+  { value: "mixte", label: "Mixte (tous les moyens)" },
 ];
 
 export default function PreferencesForm({
@@ -128,7 +119,7 @@ export default function PreferencesForm({
           </CardHeader>
           <CardContent>
             <Controller
-              name="genre_parrain"
+              name="genreParrain"
               control={control}
               render={({ field }) => (
                 <RadioGroup
@@ -141,26 +132,31 @@ export default function PreferencesForm({
                       <RadioGroupItem
                         value={option.value}
                         id={`genre-${option.value}`}
-                        className="peer sr-only"
+                        className="sr-only"
                       />
                       <Label
                         htmlFor={`genre-${option.value}`}
-                        className="flex items-center justify-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-blue-500 peer-checked:bg-blue-50 peer-checked:shadow-md peer-checked:scale-105 transition-all duration-200 relative"
+                        className={`flex items-center justify-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
+                          field.value === option.value
+                            ? "border-blue-500 bg-blue-100 text-blue-900 shadow-md scale-105"
+                            : "border-gray-200"
+                        }`}
                       >
-                        <span className="text-2xl">{option.icon}</span>
                         <span className="font-medium">{option.label}</span>
-                        <div className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full items-center justify-center text-white text-xs opacity-0 peer-checked:opacity-100 transition-opacity hidden peer-checked:flex">
-                          ✓
-                        </div>
+                        {field.value === option.value && (
+                          <div className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                            ✓
+                          </div>
+                        )}
                       </Label>
                     </div>
                   ))}
                 </RadioGroup>
               )}
             />
-            {errors.genre_parrain && (
+            {errors.genreParrain && (
               <p className="text-sm text-red-600 mt-2">
-                {errors.genre_parrain.message}
+                {errors.genreParrain.message}
               </p>
             )}
           </CardContent>
@@ -175,7 +171,7 @@ export default function PreferencesForm({
           </CardHeader>
           <CardContent>
             <Controller
-              name="type_relation"
+              name="typeRelation"
               control={control}
               render={({ field }) => (
                 <RadioGroup
@@ -188,22 +184,31 @@ export default function PreferencesForm({
                       <RadioGroupItem
                         value={option.value}
                         id={`relation-${option.value}`}
-                        className="peer sr-only"
+                        className="sr-only"
                       />
                       <Label
                         htmlFor={`relation-${option.value}`}
-                        className={`flex flex-col gap-2 p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${option.color} peer-checked:ring-2 peer-checked:ring-blue-500 peer-checked:shadow-lg peer-checked:scale-105 relative`}
+                        className={`flex flex-col gap-2 p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 relative ${
+                          field.value === option.value
+                            ? "border-blue-500 bg-blue-100 text-blue-900 shadow-lg scale-105"
+                            : "border-gray-200 bg-gray-50 hover:bg-gray-100"
+                        }`}
                       >
-                        <div className="flex items-center gap-3">
-                          <span className="text-2xl">{option.icon}</span>
-                          <span className="font-semibold text-gray-900">
-                            {option.label}
-                          </span>
-                          <div className="ml-auto w-6 h-6 bg-blue-500 rounded-full items-center justify-center text-white text-sm opacity-0 peer-checked:opacity-100 transition-opacity hidden peer-checked:flex">
-                            ✓
-                          </div>
+                        <div className="flex items-center justify-between">
+                          <span className="font-semibold">{option.label}</span>
+                          {field.value === option.value && (
+                            <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                              ✓
+                            </div>
+                          )}
                         </div>
-                        <p className="text-sm text-gray-600 ml-11">
+                        <p
+                          className={`text-sm ${
+                            field.value === option.value
+                              ? "text-blue-800"
+                              : "text-gray-600"
+                          }`}
+                        >
                           {option.description}
                         </p>
                       </Label>
@@ -212,9 +217,9 @@ export default function PreferencesForm({
                 </RadioGroup>
               )}
             />
-            {errors.type_relation && (
+            {errors.typeRelation && (
               <p className="text-sm text-red-600 mt-2">
-                {errors.type_relation.message}
+                {errors.typeRelation.message}
               </p>
             )}
           </CardContent>
@@ -229,7 +234,7 @@ export default function PreferencesForm({
           </CardHeader>
           <CardContent>
             <Controller
-              name="frequence_contact"
+              name="frequenceContact"
               control={control}
               render={({ field }) => (
                 <RadioGroup
@@ -242,28 +247,33 @@ export default function PreferencesForm({
                       <RadioGroupItem
                         value={option.value}
                         id={`frequence-${option.value}`}
-                        className="peer sr-only"
+                        className="sr-only"
                       />
                       <Label
                         htmlFor={`frequence-${option.value}`}
-                        className="flex flex-col items-center gap-2 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-green-500 peer-checked:bg-green-50 peer-checked:shadow-md peer-checked:scale-105 transition-all duration-200 text-center relative"
+                        className={`flex flex-col items-center justify-center text-center gap-2 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
+                          field.value === option.value
+                            ? "border-blue-500 bg-blue-100 text-blue-900 shadow-md scale-105"
+                            : "border-gray-200"
+                        }`}
                       >
-                        <span className="text-2xl">{option.icon}</span>
                         <span className="font-medium text-sm">
                           {option.label}
                         </span>
-                        <div className="absolute top-2 right-2 w-5 h-5 bg-green-500 rounded-full items-center justify-center text-white text-xs opacity-0 peer-checked:opacity-100 transition-opacity hidden peer-checked:flex">
-                          ✓
-                        </div>
+                        {field.value === option.value && (
+                          <div className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                            ✓
+                          </div>
+                        )}
                       </Label>
                     </div>
                   ))}
                 </RadioGroup>
               )}
             />
-            {errors.frequence_contact && (
+            {errors.frequenceContact && (
               <p className="text-sm text-red-600 mt-2">
-                {errors.frequence_contact.message}
+                {errors.frequenceContact.message}
               </p>
             )}
           </CardContent>
@@ -278,7 +288,7 @@ export default function PreferencesForm({
           </CardHeader>
           <CardContent>
             <Controller
-              name="mode_communication"
+              name="modeCommunication"
               control={control}
               render={({ field }) => (
                 <RadioGroup
@@ -291,26 +301,31 @@ export default function PreferencesForm({
                       <RadioGroupItem
                         value={option.value}
                         id={`communication-${option.value}`}
-                        className="peer sr-only"
+                        className="sr-only"
                       />
                       <Label
                         htmlFor={`communication-${option.value}`}
-                        className="flex items-center gap-3 p-4 border-2 border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 peer-checked:border-orange-500 peer-checked:bg-orange-50 peer-checked:shadow-md peer-checked:scale-105 transition-all duration-200 relative"
+                        className={`flex items-center justify-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
+                          field.value === option.value
+                            ? "border-blue-500 bg-blue-100 text-blue-900 shadow-md scale-105"
+                            : "border-gray-200"
+                        }`}
                       >
-                        <span className="text-2xl">{option.icon}</span>
                         <span className="font-medium">{option.label}</span>
-                        <div className="ml-auto w-6 h-6 bg-orange-500 rounded-full items-center justify-center text-white text-sm opacity-0 peer-checked:opacity-100 transition-opacity hidden peer-checked:flex">
-                          ✓
-                        </div>
+                        {field.value === option.value && (
+                          <div className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                            ✓
+                          </div>
+                        )}
                       </Label>
                     </div>
                   ))}
                 </RadioGroup>
               )}
             />
-            {errors.mode_communication && (
+            {errors.modeCommunication && (
               <p className="text-sm text-red-600 mt-2">
-                {errors.mode_communication.message}
+                {errors.modeCommunication.message}
               </p>
             )}
           </CardContent>
@@ -390,7 +405,7 @@ export default function PreferencesForm({
             </div>
 
             <Controller
-              name="accepte_conditions"
+              name="accepteConditions"
               control={control}
               render={({ field }) => (
                 <div className="flex items-start gap-3 p-4 bg-white rounded-lg border-2 border-blue-200">
@@ -411,9 +426,9 @@ export default function PreferencesForm({
                 </div>
               )}
             />
-            {errors.accepte_conditions && (
+            {errors.accepteConditions && (
               <p className="text-sm text-red-600">
-                {errors.accepte_conditions.message}
+                {errors.accepteConditions.message}
               </p>
             )}
           </CardContent>
