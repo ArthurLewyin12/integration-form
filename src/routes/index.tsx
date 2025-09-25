@@ -102,29 +102,13 @@ function RouteComponent() {
 
   return (
     <div className="flex flex-col lg:flex-row h-screen bg-background">
-      {/* Header mobile : Version améliorée */}
-      <div className="lg:hidden bg-primary shadow-xl border-b-4 border-accent p-4">
-        {/* En-tête avec logo et titre */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-12 h-12 bg-primary-foreground rounded-full mb-3 shadow-lg">
-            <GraduationCap className="w-6 h-6 text-primary" />
-          </div>
-          <h1 className="text-2xl font-bold text-primary-foreground mb-1">
-            Programme MIAGE
-          </h1>
-          <div className="flex items-center justify-center gap-2 text-primary-foreground">
-            <Users className="w-4 h-4" />
-            <span className="text-sm font-medium">Parrainage L1</span>
-            <Sparkles className="w-4 h-4" />
-          </div>
-        </div>
-
-        {/* Stepper mobile compact */}
-        <div className="bg-primary-foreground/90 backdrop-blur-sm rounded-xl p-4 mb-4 shadow-lg">
+      {/* Header mobile : Version épurée et sticky */}
+      <div className="lg:hidden sticky top-2 z-50 mx-4 mt-2 mb-4">
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200">
           <Stepper
             value={currentStep}
             orientation="horizontal"
-            className="mb-4"
+            className="mb-0"
           >
             {steps.map((step, index) => (
               <StepperItem
@@ -155,24 +139,6 @@ function RouteComponent() {
               </StepperItem>
             ))}
           </Stepper>
-        </div>
-
-        {/* Progression mobile stylée */}
-        <div className="bg-primary-foreground/90 backdrop-blur-sm rounded-lg p-3 shadow-lg">
-          <div className="flex justify-between items-center text-primary mb-2">
-            <span className="text-sm font-semibold">
-              {steps[currentStep].title}
-            </span>
-            <span className="text-sm bg-accent text-accent-foreground px-2 py-1 rounded-full font-bold">
-              {currentStep + 1}/{steps.length}
-            </span>
-          </div>
-          <div className="w-full bg-muted rounded-full h-3 shadow-inner">
-            <div
-              className="bg-accent h-3 rounded-full transition-all duration-500 shadow-sm"
-              style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-            />
-          </div>
         </div>
       </div>
 

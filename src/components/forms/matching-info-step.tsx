@@ -120,6 +120,11 @@ export default function MatchingInfoForm({
       hobbies: [],
       specialisationInteresse: [],
       objectifsEtudes: [],
+      personnalite: undefined,
+      styleApprentissage: undefined,
+      niveauTechnique: undefined,
+      participationAsso: undefined,
+      attentesParrainage: "",
       ...initialData,
     },
   });

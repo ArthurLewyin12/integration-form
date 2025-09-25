@@ -113,7 +113,7 @@ export default function PersonalInfoForm({
                   type="number"
                   {...register("age", { valueAsNumber: true })}
                   placeholder="Votre âge"
-                  min="17"
+                  min="14"
                   max="25"
                 />
                 {errors.age && (

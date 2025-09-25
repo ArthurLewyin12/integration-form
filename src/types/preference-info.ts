@@ -32,5 +32,9 @@ export const preferencesSchema = z.object({
   commentaires: z.string().max(200).optional(),
 
   // Conditions
-  accepteConditions: z.literal(true),
+  accepteConditions: z
+    .boolean()
+    .refine((val) => val === true, {
+      message: "Vous devez accepter les conditions pour continuer",
+    }),
 });

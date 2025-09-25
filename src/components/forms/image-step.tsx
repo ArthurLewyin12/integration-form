@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { AlertCircle, ImageUp, X, ArrowLeft, CheckCircle } from "lucide-react";
 import { useFileUpload } from "@/hooks/use-file-upload";
 import { photoSchema } from "@/types/profile-image";
+import { useEffect } from "react";
 
 type PhotoData = z.infer<typeof photoSchema>;
 
@@ -29,7 +30,10 @@ export default function PhotoUploadForm({
     formState: { errors },
   } = useForm<PhotoData>({
     resolver: zodResolver(photoSchema),
-    defaultValues: initialData,
+    defaultValues: {
+      photo: undefined,
+      ...initialData,
+    },
   });
 
   const maxSizeMB = 5;
@@ -49,12 +53,13 @@ export default function PhotoUploadForm({
   ] = useFileUpload({
     accept: "image/jpeg,image/jpg,image/png",
     maxSize,
-    onFilesChange: (files) => {
-      if (files.length > 0 && files[0].file instanceof File) {
-        setValue("photo", files[0].file, { shouldValidate: true });
-      }
-    },
   });
+
+  useEffect(() => {
+    if (files.length > 0 && files[0].file instanceof File) {
+      setValue("photo", files[0].file, { shouldValidate: true });
+    }
+  }, [files, setValue]);
 
   const previewUrl = files[0]?.preview || null;
 
