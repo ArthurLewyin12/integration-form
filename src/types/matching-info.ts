@@ -1,7 +1,6 @@
 import { z } from "zod";
 
 export const matchingSchema = z.object({
-  // Centres d'intérêt
   hobbies: z
     .array(
       z.enum([
@@ -21,12 +20,10 @@ export const matchingSchema = z.object({
         "cuisine",
       ]),
     )
-    .min(1, "Sélectionnez au moins un centre d'intérêt"),
-
-  // Type de personnalité
-  personnalite: z.enum(["extraverti", "introverti", "equilibre"]),
-
-  // Domaines d'intérêt en MIAGE
+    .min(1, { message: "Veuillez sélectionner au moins un centre d'intérêt." }),
+  personnalite: z.enum(["extraverti", "introverti", "equilibre"], {
+    message: "Veuillez sélectionner votre type de personnalité.",
+  }),
   specialisationInteresse: z
     .array(
       z.enum([
@@ -40,9 +37,9 @@ export const matchingSchema = z.object({
         "reseaux",
       ]),
     )
-    .min(1, "Sélectionnez au moins un domaine"),
-
-  // Objectifs académiques
+    .min(1, {
+      message: "Veuillez sélectionner au moins un domaine qui vous intéresse.",
+    }),
   objectifsEtudes: z
     .array(
       z.enum([
@@ -55,35 +52,35 @@ export const matchingSchema = z.object({
         "competition_programmation",
       ]),
     )
-    .min(1, "Sélectionnez au moins un objectif"),
-
-  // Style d'apprentissage
-  styleApprentissage: z.enum([
-    "pratique_hands_on",
-    "theorique_conceptuel",
-    "groupe_collaboratif",
-    "individuel_autonome",
-  ]),
-
-  // Niveau technique actuel
-  niveauTechnique: z.enum([
-    "debutant",
-    "quelques_bases",
-    "intermediaire",
-    "avance",
-  ]),
-
-  // Participation associative
-  participationAsso: z.enum([
-    "tres_actif",
-    "occasionnel",
-    "observateur",
-    "pas_interesse",
-  ]),
-
-  // Attentes du parrainage
+    .min(1, {
+      message: "Veuillez sélectionner au moins un objectif d'études.",
+    }),
+  styleApprentissage: z.enum(
+    [
+      "pratique_hands_on",
+      "theorique_conceptuel",
+      "groupe_collaboratif",
+      "individuel_autonome",
+    ],
+    {
+      message: "Veuillez sélectionner votre style d'apprentissage.",
+    },
+  ),
+  niveauTechnique: z.enum(
+    ["debutant", "quelques_bases", "intermediaire", "avance"],
+    {
+      message: "Veuillez sélectionner votre niveau technique.",
+    },
+  ),
+  participationAsso: z.enum(
+    ["tres_actif", "occasionnel", "observateur", "pas_interesse"],
+    {
+      message: "Veuillez indiquer votre niveau de participation associative.",
+    },
+  ),
   attentesParrainage: z
     .string()
-    .min(20, "Décrivez vos attentes (minimum 20 caractères)")
-    .max(300, "Maximum 300 caractères"),
+    .min(1, "Veuillez décrire vos attentes.")
+    .min(20, "Veuillez décrire vos attentes en 20 caractères minimum.")
+    .max(300, "La description ne doit pas dépasser 300 caractères."),
 });

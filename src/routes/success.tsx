@@ -1,4 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  useNavigate,
+  useLocation,
+} from "@tanstack/react-router";
+import { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -14,9 +19,27 @@ export const Route = createFileRoute("/success")({
 });
 
 function SuccessComponent() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Si l'utilisateur arrive sur cette page sans être passé par la soumission,
+    // on le redirige vers la page d'accueil.
+    if (location.state?.from !== "submission") {
+      navigate({ to: "/", replace: true });
+    }
+  }, [location.state, navigate]);
+
+  // Affiche un loader ou rien en attendant la redirection
+  if (location.state?.from !== "submission") {
+    return null;
+  }
+
   const phoneNumber = "2250152024919"; // Préfixe +225
   const message = "Bonjour, je crois m'être trompé lors de mon inscription.";
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+    message,
+  )}`;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">

@@ -36,8 +36,8 @@ export default function PhotoUploadForm({
     },
   });
 
-  const maxSizeMB = 5;
-  const maxSize = maxSizeMB * 1024 * 1024; // 5MB
+  const maxSizeMB = 10;
+  const maxSize = maxSizeMB * 1024 * 1024; // 10MB
 
   const [
     { files, isDragging, errors: uploadErrors },

@@ -109,6 +109,18 @@ export default function MatchingInfoForm({
   onPrev,
   initialData,
 }: MatchingInfoFormProps) {
+  const defaultValuesForForm: Partial<MatchingInfoData> = {
+    hobbies: [],
+    specialisationInteresse: [],
+    objectifsEtudes: [],
+    personnalite: undefined,
+    styleApprentissage: undefined,
+    niveauTechnique: undefined,
+    participationAsso: undefined,
+    attentesParrainage: "",
+    ...initialData,
+  };
+
   const {
     control,
     handleSubmit,
@@ -116,17 +128,7 @@ export default function MatchingInfoForm({
     formState: { errors, isSubmitting },
   } = useForm<MatchingInfoData>({
     resolver: zodResolver(matchingSchema),
-    defaultValues: {
-      hobbies: [],
-      specialisationInteresse: [],
-      objectifsEtudes: [],
-      personnalite: undefined,
-      styleApprentissage: undefined,
-      niveauTechnique: undefined,
-      participationAsso: undefined,
-      attentesParrainage: "",
-      ...initialData,
-    },
+    defaultValues: defaultValuesForForm,
   });
 
   const onSubmit = (data: MatchingInfoData) => {

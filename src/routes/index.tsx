@@ -32,7 +32,7 @@ function RouteComponent() {
     annee: "L1", // Valeur par défaut
   });
 
-  const { mutateAsync: submitForm, isPending: isSubmitting } = useSubmitForm();
+  const { mutate: submitForm, isPending: isSubmitting } = useSubmitForm();
 
   // Configuration des steps
   const steps = [
@@ -81,17 +81,23 @@ function RouteComponent() {
     toast.success("Préférences enregistrées !");
   };
 
-  const handlePhotoSubmit = async (data: z.infer<typeof photoSchema>) => {
+  const handlePhotoSubmit = (data: z.infer<typeof photoSchema>) => {
     const finalData = { ...formData, ...data } as CompleteFormData;
 
-    try {
-      await submitForm(finalData);
-      toast.success("Inscription soumise avec succès !");
-      navigate({ to: "/success" });
-    } catch (error) {
-      toast.error("Erreur lors de l'envoi. Veuillez réessayer.");
-      console.error("Erreur :", error);
-    }
+    submitForm(finalData, {
+      onSuccess: () => {
+        toast.success("Inscription soumise avec succès !");
+        navigate({ to: "/success", state: { from: "submission" } });
+      },
+      onError: (error: any) => {
+        // Affiche le message d'erreur de l'API s'il existe, sinon un message générique
+        const errorMessage =
+          error.response?.data?.error ||
+          "Une erreur inattendue est survenue. Veuillez réessayer.";
+        toast.error(errorMessage);
+        console.error("Erreur détaillée:", error);
+      },
+    });
   };
 
   const goToPreviousStep = () => {

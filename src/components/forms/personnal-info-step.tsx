@@ -34,16 +34,23 @@ export default function PersonalInfoForm({
   onNext,
   initialData,
 }: PersonalInfoFormProps) {
+  const defaultValuesForForm: Partial<PersonalInfoData> = {
+    nom: "",
+    prenoms: "",
+    age: undefined,
+    annee: "L1",
+    email: "",
+    telephone: "",
+    ...initialData,
+  };
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<PersonalInfoData>({
     resolver: zodResolver(personalInfoSchema),
-    defaultValues: {
-      annee: "L1",
-      ...initialData,
-    },
+    defaultValues: defaultValuesForForm,
   });
 
   const onSubmit = (data: PersonalInfoData) => {

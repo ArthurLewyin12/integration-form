@@ -80,6 +80,16 @@ export default function PreferencesForm({
   onPrev,
   initialData,
 }: PreferencesFormProps) {
+  const defaultValuesForForm: Partial<PreferencesData> = {
+    genreParrain: undefined,
+    typeRelation: undefined,
+    frequenceContact: undefined,
+    modeCommunication: undefined,
+    commentaires: "",
+    accepteConditions: false,
+    ...initialData,
+  };
+
   const {
     control,
     handleSubmit,
@@ -87,15 +97,7 @@ export default function PreferencesForm({
     formState: { errors, isSubmitting },
   } = useForm<PreferencesData>({
     resolver: zodResolver(preferencesSchema),
-    defaultValues: {
-      genreParrain: undefined,
-      typeRelation: undefined,
-      frequenceContact: undefined,
-      modeCommunication: undefined,
-      commentaires: "",
-      accepteConditions: false,
-      ...initialData,
-    },
+    defaultValues: defaultValuesForForm,
   });
 
   const onSubmit = (data: PreferencesData) => {
