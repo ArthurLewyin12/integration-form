@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import {
   Stepper,
@@ -106,45 +106,65 @@ function RouteComponent() {
     }
   };
 
+  // Auto-scroll to top when step changes
+  useEffect(() => {
+    // Scroll the content area itself
+    const contentArea = document.querySelector(".form-content-area");
+    if (contentArea) {
+      contentArea.scrollTo({ top: 0, behavior: "smooth" });
+    }
+    // Also scroll the window to the top in case it's scrolled
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentStep]);
+
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-background">
-      {/* Header mobile : Version épurée et sticky */}
-      <div className="lg:hidden sticky top-2 z-50 mx-4 mt-2 mb-4">
+    <div className="flex flex-col lg:flex-row min-h-screen bg-background">
+      {/* Header mobile : Carte flottante sticky */}
+      <div className="lg:hidden sticky top-2 z-50 mx-4 mb-4">
         <div className="bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-200">
-          <Stepper
-            value={currentStep}
-            orientation="horizontal"
-            className="mb-0"
-          >
-            {steps.map((step, index) => (
-              <StepperItem
-                key={index}
-                step={index}
-                completed={currentStep > index}
-                className="flex-1"
-              >
-                <StepperTrigger className="flex flex-col items-center gap-2 text-center p-2">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold shadow-md ${
-                      currentStep >= index
-                        ? "bg-primary text-primary-foreground"
-                        : "bg-muted text-muted-foreground"
-                    }`}
-                  >
-                    {step.icon}
-                  </div>
-                  <div className="hidden xs:block">
-                    <StepperTitle className="font-medium text-primary text-xs">
+          <div className="text-center mb-4">
+            <p className="text-xs font-semibold text-gray-600 uppercase tracking-wide">
+              Étape {currentStep + 1} sur {steps.length}
+            </p>
+            <h2 className="text-sm sm:text-base font-bold text-gray-900 mt-1">
+              {steps[currentStep].title}
+            </h2>
+          </div>
+
+          <div className="flex justify-center">
+            <Stepper
+              value={currentStep}
+              orientation="horizontal"
+              className="mb-0"
+            >
+              {steps.map((step, index) => (
+                <StepperItem
+                  key={index}
+                  step={index}
+                  completed={currentStep > index}
+                  className="flex-1"
+                >
+                  <StepperTrigger className="flex flex-col items-center gap-2 text-center p-2">
+                    <div
+                      className={`w-8 h-8 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold shadow-md transition-all ${
+                        currentStep >= index
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      {step.icon}
+                    </div>
+                    <span className="text-xs font-medium hidden sm:block text-primary">
                       {step.shortTitle}
-                    </StepperTitle>
-                  </div>
-                </StepperTrigger>
-                {index < steps.length - 1 && (
-                  <StepperSeparator className="bg-border" />
-                )}
-              </StepperItem>
-            ))}
-          </Stepper>
+                    </span>
+                  </StepperTrigger>
+                  {index < steps.length - 1 && (
+                    <StepperSeparator className="bg-border" />
+                  )}
+                </StepperItem>
+              ))}
+            </Stepper>
+          </div>
         </div>
       </div>
 
@@ -268,8 +288,8 @@ function RouteComponent() {
       </div>
 
       {/* Contenu principal : Formulaires */}
-      <div className="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto flex justify-center bg-card">
-        <div className="w-full max-w-4xl">
+      <div className="form-content-area flex-1 p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 overflow-y-auto flex justify-center bg-card">
+        <div className="w-full max-w-4xl px-0 sm:px-2">
           {currentStep === 0 && (
             <PersonalInfoForm
               onNext={handlePersonalInfoNext}

@@ -3,7 +3,7 @@ import axios from "axios";
 // Configuration de base
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL || "https://ji-api.onrender.com",
-  timeout: 10000,
+  timeout: 60000, // 60 secondes pour les uploads d'images
   headers: {
     "Content-Type": "application/json",
   },
@@ -82,6 +82,7 @@ export const request = {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      timeout: 120000, // 2 minutes pour les uploads avec Cloudinary
     });
 
     return response.data;

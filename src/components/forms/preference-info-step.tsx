@@ -109,11 +109,11 @@ export default function PreferencesForm({
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center space-y-3">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-4">
-          <Heart className="w-8 h-8 text-white" />
+        <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full mb-4">
+          <Heart className="w-7 h-7 sm:w-8 sm:h-8 text-white" />
         </div>
-        <h2 className="text-3xl font-bold text-gray-900">Vos Préférences</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Vos Préférences</h2>
+        <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto">
           Aidez-nous à vous trouver le parrain idéal en précisant vos
           préférences
         </p>
@@ -135,7 +135,7 @@ export default function PreferencesForm({
                 <RadioGroup
                   value={field.value}
                   onValueChange={field.onChange}
-                  className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4"
                 >
                   {genreParrainOptions.map((option) => (
                     <div key={option.value} className="relative">
@@ -146,13 +146,13 @@ export default function PreferencesForm({
                       />
                       <Label
                         htmlFor={`genre-${option.value}`}
-                        className={`flex items-center justify-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
+                        className={`flex items-center justify-center gap-2 sm:gap-3 p-2 sm:p-3 lg:p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
                           field.value === option.value
                             ? "border-blue-500 bg-blue-100 text-blue-900 shadow-md scale-105"
                             : "border-gray-200"
                         }`}
                       >
-                        <span className="font-medium">{option.label}</span>
+                        <span className="text-sm sm:text-base font-medium">{option.label}</span>
                         {field.value === option.value && (
                           <div className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
                             ✓
@@ -187,7 +187,7 @@ export default function PreferencesForm({
                 <RadioGroup
                   value={field.value}
                   onValueChange={field.onChange}
-                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 sm:gap-3 lg:gap-4"
                 >
                   {typeRelationOptions.map((option) => (
                     <div key={option.value} className="relative">
@@ -198,22 +198,22 @@ export default function PreferencesForm({
                       />
                       <Label
                         htmlFor={`relation-${option.value}`}
-                        className={`flex flex-col gap-2 p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 relative ${
+                        className={`flex flex-col gap-1 sm:gap-2 p-2 sm:p-3 lg:p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 relative ${
                           field.value === option.value
                             ? "border-blue-500 bg-blue-100 text-blue-900 shadow-lg scale-105"
                             : "border-gray-200 bg-gray-50 hover:bg-gray-100"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-semibold">{option.label}</span>
+                          <span className="text-sm sm:text-base font-semibold">{option.label}</span>
                           {field.value === option.value && (
-                            <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm">
+                            <div className="w-5 h-5 sm:w-6 sm:h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
                               ✓
                             </div>
                           )}
                         </div>
                         <p
-                          className={`text-sm ${
+                          className={`text-xs sm:text-sm ${
                             field.value === option.value
                               ? "text-blue-800"
                               : "text-gray-600"
@@ -250,7 +250,7 @@ export default function PreferencesForm({
                 <RadioGroup
                   value={field.value}
                   onValueChange={field.onChange}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4"
                 >
                   {frequenceContactOptions.map((option) => (
                     <div key={option.value} className="relative">
@@ -261,13 +261,13 @@ export default function PreferencesForm({
                       />
                       <Label
                         htmlFor={`frequence-${option.value}`}
-                        className={`flex flex-col items-center justify-center text-center gap-2 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
+                        className={`flex flex-col items-center justify-center text-center gap-1 sm:gap-2 p-2 sm:p-3 lg:p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
                           field.value === option.value
                             ? "border-blue-500 bg-blue-100 text-blue-900 shadow-md scale-105"
                             : "border-gray-200"
                         }`}
                       >
-                        <span className="font-medium text-sm">
+                        <span className="font-medium text-xs sm:text-sm">
                           {option.label}
                         </span>
                         {field.value === option.value && (
@@ -304,7 +304,7 @@ export default function PreferencesForm({
                 <RadioGroup
                   value={field.value}
                   onValueChange={field.onChange}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4"
                 >
                   {modeCommunicationOptions.map((option) => (
                     <div key={option.value} className="relative">
@@ -315,13 +315,13 @@ export default function PreferencesForm({
                       />
                       <Label
                         htmlFor={`communication-${option.value}`}
-                        className={`flex items-center justify-center gap-3 p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
+                        className={`flex items-center justify-center gap-2 sm:gap-3 p-2 sm:p-3 lg:p-4 border-2 rounded-lg cursor-pointer hover:bg-gray-50 transition-all duration-200 relative ${
                           field.value === option.value
                             ? "border-blue-500 bg-blue-100 text-blue-900 shadow-md scale-105"
                             : "border-gray-200"
                         }`}
                       >
-                        <span className="font-medium">{option.label}</span>
+                        <span className="text-sm sm:text-base font-medium">{option.label}</span>
                         {field.value === option.value && (
                           <div className="absolute top-2 right-2 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
                             ✓
@@ -387,7 +387,7 @@ export default function PreferencesForm({
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 text-xs sm:text-sm text-gray-700">
               <div className="flex items-start gap-3 p-3 bg-white/50 rounded-lg">
                 <span className="text-green-600 mt-0.5">✓</span>
                 <span>
@@ -444,11 +444,11 @@ export default function PreferencesForm({
           </CardContent>
         </Card>
 
-        <div className="flex justify-between items-center pt-6">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:justify-between sm:items-center pt-6 border-t">
           <Button
             variant="outline"
             onClick={onPrev}
-            className="flex items-center gap-2 px-6 py-3 text-base bg-transparent"
+            className="order-2 sm:order-1 w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4" />
             Précédent
@@ -456,7 +456,7 @@ export default function PreferencesForm({
           <Button
             onClick={handleSubmit(onSubmit)}
             disabled={isSubmitting}
-            className="flex items-center gap-2 px-8 py-3 text-base "
+            className="order-1 sm:order-2 w-full sm:w-auto flex items-center justify-center gap-2 px-4 sm:px-8 py-2 sm:py-3 text-sm sm:text-base"
           >
             {isSubmitting ? "Validation..." : "Continuer"}
             <ArrowRight className="w-4 h-4" />

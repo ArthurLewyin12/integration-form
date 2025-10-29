@@ -54,28 +54,28 @@ function SuccessComponent() {
         <Card className="border-0 shadow-xl backdrop-blur-sm bg-white/80">
           <CardHeader className="text-center space-y-4 pb-6">
             <CardTitle className="text-3xl font-bold text-gray-900">
-              Inscription réussie !
+              Bienvenue dans la famille MIAGE ! 🎓
             </CardTitle>
             <p className="text-gray-600 text-lg leading-relaxed">
-              Votre demande de parrainage a bien été enregistrée
+              Ton inscription au parrainage a été validée. Tu es assuré d'avoir un parrain cette année pour t'accompagner !
             </p>
           </CardHeader>
 
           <CardContent className="space-y-6">
             {/* Étapes suivantes */}
-            <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
+            <div className="bg-emerald-50 border border-emerald-100 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <div className="flex-shrink-0">
-                  <Mail className="w-5 h-5 text-blue-600 mt-0.5" />
+                  <Mail className="w-5 h-5 text-emerald-600 mt-0.5" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-blue-900 mb-1">
-                    Prochaines étapes
+                  <h4 className="font-semibold text-emerald-900 mb-1">
+                    Ce qu'il se passe maintenant
                   </h4>
-                  <ul className="text-blue-800 text-sm space-y-1">
-                    <li>• Vérifiez votre boîte mail (y compris les spams)</li>
-                    <li>• Confirmez votre adresse email</li>
-                    <li>• Nous vous contacterons sous 48h</li>
+                  <ul className="text-emerald-800 text-sm space-y-1">
+                    <li>• Un email de bienvenue t'a été envoyé</li>
+                    <li>• Reste à l'affût de tes emails</li>
+                    <li>• Une belle aventure t'attend !</li>
                   </ul>
                 </div>
               </div>
@@ -84,8 +84,7 @@ function SuccessComponent() {
             {/* Message d'information */}
             <div className="text-center py-4">
               <p className="text-gray-500 text-sm">
-                Notre équipe analyse votre profil pour vous trouver le parrain
-                idéal
+                Prépare-toi à une belle rencontre et à une année riche en apprentissages et en amitié !
               </p>
             </div>
           </CardContent>

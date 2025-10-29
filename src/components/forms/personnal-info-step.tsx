@@ -60,11 +60,11 @@ export default function PersonalInfoForm({
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       <div className="text-center space-y-2">
-        <div className="inline-flex items-center justify-center w-16 h-16 bg-muted rounded-full mb-4">
-          <User className="w-8 h-8 text-muted-foreground" />
+        <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-muted rounded-full mb-4">
+          <User className="w-7 h-7 sm:w-8 sm:h-8 text-muted-foreground" />
         </div>
-        <h2 className="text-3xl font-bold">Informations personnelles</h2>
-        <p className="text-muted-foreground text-lg">
+        <h2 className="text-2xl sm:text-3xl font-bold">Informations personnelles</h2>
+        <p className="text-muted-foreground text-sm sm:text-base lg:text-lg">
           Commençons par vos informations de base
         </p>
       </div>
@@ -79,7 +79,7 @@ export default function PersonalInfoForm({
             <CardDescription>Vos informations d'identification</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label htmlFor="nom">Nom *</Label>
                 <Input
@@ -88,7 +88,7 @@ export default function PersonalInfoForm({
                   placeholder="Votre nom de famille"
                 />
                 {errors.nom && (
-                  <p className="text-sm text-destructive">
+                  <p className="text-xs sm:text-sm text-destructive">
                     {errors.nom.message}
                   </p>
                 )}
@@ -102,14 +102,14 @@ export default function PersonalInfoForm({
                   placeholder="Vos prénoms"
                 />
                 {errors.prenoms && (
-                  <p className="text-sm text-destructive">
+                  <p className="text-xs sm:text-sm text-destructive">
                     {errors.prenoms.message}
                   </p>
                 )}
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label htmlFor="age" className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
@@ -124,7 +124,7 @@ export default function PersonalInfoForm({
                   max="25"
                 />
                 {errors.age && (
-                  <p className="text-sm text-destructive">
+                  <p className="text-xs sm:text-sm text-destructive">
                     {errors.age.message}
                   </p>
                 )}
@@ -171,7 +171,7 @@ export default function PersonalInfoForm({
                 placeholder="votre.email@exemple.com"
               />
               {errors.email && (
-                <p className="text-sm text-destructive">
+                <p className="text-xs sm:text-sm text-destructive">
                   {errors.email.message}
                 </p>
               )}
@@ -188,7 +188,7 @@ export default function PersonalInfoForm({
                 placeholder="0123456789"
               />
               {errors.telephone && (
-                <p className="text-sm text-destructive">
+                <p className="text-xs sm:text-sm text-destructive">
                   {errors.telephone.message}
                 </p>
               )}
@@ -199,15 +199,15 @@ export default function PersonalInfoForm({
           </CardContent>
         </Card>
 
-        <div className="pt-6">
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
+        <div className="pt-6 border-t">
+          <Button type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
             {isSubmitting ? (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
                 Validation...
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center justify-center gap-2">
                 Continuer
                 <ArrowRight className="w-4 h-4" />
               </div>

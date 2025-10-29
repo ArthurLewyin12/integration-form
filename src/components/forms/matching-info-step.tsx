@@ -140,8 +140,8 @@ export default function MatchingInfoForm({
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div className="text-center space-y-3">
-        <h2 className="text-3xl font-bold text-gray-900">Centres d'intérêt</h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Centres d'intérêt</h2>
+        <p className="text-sm sm:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto">
           Aidez-nous à vous trouver le parrain idéal en nous parlant de vos
           passions et objectifs
         </p>
@@ -165,11 +165,11 @@ export default function MatchingInfoForm({
                 name="hobbies"
                 control={control}
                 render={({ field }) => (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 lg:gap-4">
                     {hobbiesOptions.map((option) => (
                       <div
                         key={option.value}
-                        className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+                        className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 rounded-lg border hover:bg-gray-50 transition-colors"
                       >
                         <Checkbox
                           id={`hobby-${option.value}`}
@@ -207,7 +207,7 @@ export default function MatchingInfoForm({
           </Card>
 
           {/* Personality and Learning Style - Side by side on larger screens */}
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {/* Type de personnalité Card */}
             <Card>
               <CardHeader>
@@ -314,11 +314,11 @@ export default function MatchingInfoForm({
                 name="specialisationInteresse"
                 control={control}
                 render={({ field }) => (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
                     {specialisationOptions.map((option) => (
                       <div
                         key={option.value}
-                        className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+                        className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 rounded-lg border hover:bg-gray-50 transition-colors"
                       >
                         <Checkbox
                           id={`specialisation-${option.value}`}
@@ -368,11 +368,11 @@ export default function MatchingInfoForm({
                 name="objectifsEtudes"
                 control={control}
                 render={({ field }) => (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
                     {objectifsOptions.map((option) => (
                       <div
                         key={option.value}
-                        className="flex items-center space-x-3 p-3 rounded-lg border hover:bg-gray-50 transition-colors"
+                        className="flex items-center space-x-2 sm:space-x-3 p-2 sm:p-3 rounded-lg border hover:bg-gray-50 transition-colors"
                       >
                         <Checkbox
                           id={`objectif-${option.value}`}
@@ -410,7 +410,7 @@ export default function MatchingInfoForm({
           </Card>
 
           {/* Technical Level and Association Participation - Side by side */}
-          <div className="grid lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
             {/* Niveau technique Card */}
             <Card>
               <CardHeader>
@@ -549,11 +549,11 @@ export default function MatchingInfoForm({
           </Card>
         </div>
 
-        <div className="flex justify-between items-center pt-6 border-t">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:justify-between sm:items-center pt-6 border-t">
           <Button
             variant="outline"
             onClick={onPrev}
-            className="flex items-center gap-2 bg-transparent"
+            className="order-2 sm:order-1 w-full sm:w-auto flex items-center justify-center gap-2 bg-transparent"
           >
             <ArrowLeft className="h-4 w-4" />
             Précédent
@@ -561,7 +561,7 @@ export default function MatchingInfoForm({
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="flex items-center gap-2"
+            className="order-1 sm:order-2 w-full sm:w-auto flex items-center justify-center gap-2"
           >
             {isSubmitting ? "Validation..." : "Continuer"}
             <ArrowRight className="h-4 w-4" />

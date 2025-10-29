@@ -70,8 +70,8 @@ export default function PhotoUploadForm({
   return (
     <div className="space-y-6">
       <div className="text-center">
-        <h2 className="text-2xl font-bold text-gray-900">Photo de profil</h2>
-        <p className="text-gray-600 mt-2">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Photo de profil</h2>
+        <p className="text-sm sm:text-base text-gray-600 mt-2">
           Ajoutez votre photo pour que votre parrain puisse vous reconnaître
         </p>
       </div>
@@ -99,7 +99,7 @@ export default function PhotoUploadForm({
                   onDragOver={handleDragOver}
                   onDrop={handleDrop}
                   data-dragging={isDragging || undefined}
-                  className="border-input hover:bg-accent/50 data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 relative flex min-h-64 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed p-6 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none has-[input:focus]:ring-[3px]"
+                  className="border-input hover:bg-accent/50 data-[dragging=true]:bg-accent/50 has-[input:focus]:border-ring has-[input:focus]:ring-ring/50 relative flex min-h-48 sm:min-h-56 md:min-h-64 flex-col items-center justify-center overflow-hidden rounded-xl border-2 border-dashed p-4 sm:p-6 transition-colors has-disabled:pointer-events-none has-disabled:opacity-50 has-[img]:border-none has-[input:focus]:ring-[3px]"
                 >
                   <input
                     {...getInputProps()}
@@ -115,20 +115,20 @@ export default function PhotoUploadForm({
                       />
                     </div>
                   ) : (
-                    <div className="flex flex-col items-center justify-center px-4 py-8 text-center">
+                    <div className="flex flex-col items-center justify-center px-3 py-6 sm:px-4 sm:py-8 text-center">
                       <div
-                        className="bg-background mb-4 flex size-16 shrink-0 items-center justify-center rounded-full border-2"
+                        className="bg-background mb-3 sm:mb-4 flex size-14 sm:size-16 shrink-0 items-center justify-center rounded-full border-2"
                         aria-hidden="true"
                       >
-                        <ImageUp className="size-8 opacity-60" />
+                        <ImageUp className="size-7 sm:size-8 opacity-60" />
                       </div>
-                      <p className="mb-2 text-lg font-medium">
+                      <p className="mb-2 text-sm sm:text-lg font-medium">
                         Glissez votre photo ici ou cliquez pour parcourir
                       </p>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-muted-foreground text-xs sm:text-sm">
                         Formats acceptés : JPG, JPEG, PNG
                       </p>
-                      <p className="text-muted-foreground text-sm">
+                      <p className="text-muted-foreground text-xs sm:text-sm">
                         Taille maximum : {maxSizeMB}MB
                       </p>
                     </div>
@@ -160,7 +160,7 @@ export default function PhotoUploadForm({
           {/* Erreurs d'upload */}
           {(uploadErrors.length > 0 || errors.photo) && (
             <div
-              className="text-destructive flex items-center gap-1 text-sm"
+              className="text-destructive flex items-center gap-1 text-xs sm:text-sm"
               role="alert"
             >
               <AlertCircle className="size-4 shrink-0" />
@@ -170,7 +170,7 @@ export default function PhotoUploadForm({
 
           {/* Confirmation quand photo uploadée */}
           {previewUrl && !errors.photo && (
-            <div className="text-green-600 flex items-center gap-1 text-sm">
+            <div className="text-green-600 flex items-center gap-1 text-xs sm:text-sm">
               <CheckCircle className="size-4 shrink-0" />
               <span>Photo téléchargée avec succès</span>
             </div>
@@ -178,11 +178,11 @@ export default function PhotoUploadForm({
         </div>
 
         {/* Conseils pour la photo */}
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h3 className="font-medium text-blue-900 mb-2">
+        <div className="bg-blue-50 p-3 sm:p-4 rounded-lg">
+          <h3 className="font-medium text-sm sm:text-base text-blue-900 mb-2">
             Conseils pour une bonne photo
           </h3>
-          <ul className="text-sm text-blue-800 space-y-1">
+          <ul className="text-xs sm:text-sm text-blue-800 space-y-1">
             <li>• Utilisez une photo récente et claire</li>
             <li>• Assurez-vous que votre visage soit bien visible</li>
             <li>• Évitez les photos de groupe</li>
@@ -192,24 +192,29 @@ export default function PhotoUploadForm({
         </div>
 
         {/* Note de confidentialité */}
-        <div className="bg-gray-50 p-4 rounded-lg">
-          <h3 className="font-medium text-gray-900 mb-2">Confidentialité</h3>
-          <p className="text-sm text-gray-700">
+        <div className="bg-gray-50 p-3 sm:p-4 rounded-lg">
+          <h3 className="font-medium text-sm sm:text-base text-gray-900 mb-2">Confidentialité</h3>
+          <p className="text-xs sm:text-sm text-gray-700">
             Votre photo sera uniquement visible par votre parrain assigné et les
             organisateurs du programme. Elle ne sera pas diffusée publiquement.
           </p>
         </div>
 
         {/* Boutons de navigation */}
-        <div className="flex justify-between pt-4">
-          <Button variant="outline" onClick={onPrev} disabled={isSubmitting}>
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 sm:justify-between sm:items-center pt-6 border-t">
+          <Button
+            variant="outline"
+            onClick={onPrev}
+            disabled={isSubmitting}
+            className="order-2 sm:order-1 w-full sm:w-auto flex items-center justify-center"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Précédent
           </Button>
           <Button
             onClick={handleSubmit(handleFormSubmit)}
             disabled={isSubmitting || !previewUrl}
-            className="bg-green-600 hover:bg-green-700"
+            className="order-1 sm:order-2 w-full sm:w-auto flex items-center justify-center bg-green-600 hover:bg-green-700"
           >
             {isSubmitting ? "Envoi en cours..." : "Finaliser mon inscription"}
             <CheckCircle className="ml-2 h-4 w-4" />
