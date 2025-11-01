@@ -167,7 +167,7 @@ function RouteComponent() {
       </div>
 
       {/* Sidebar desktop : Version améliorée */}
-      <div className="hidden lg:flex lg:w-96 p-6 bg-primary flex-col relative overflow-hidden border-r-4 border-accent shadow-2xl">
+      <div className="hidden lg:flex lg:w-96 p-4 bg-primary flex-col relative overflow-hidden border-r-4 border-accent shadow-2xl lg:fixed lg:h-screen lg:top-0 lg:left-0">
         {/* Effet de background */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-accent"></div>
         <div className="absolute -top-24 -right-24 w-48 h-48 bg-primary-foreground/10 rounded-full"></div>
@@ -175,7 +175,7 @@ function RouteComponent() {
 
         <div className="relative z-10">
           {/* Header principal desktop */}
-          <div className="mb-8">
+          <div className="mb-4">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-14 h-14 bg-primary-foreground rounded-xl flex items-center justify-center shadow-lg">
                 <GraduationCap className="w-8 h-8 text-primary" />
@@ -192,7 +192,7 @@ function RouteComponent() {
             </div>
 
             {/* Message d'encouragement */}
-            <div className="bg-primary-foreground/95 rounded-lg p-4 border-2 border-accent shadow-lg">
+            <div className="bg-primary-foreground/95 rounded-lg p-3 border-2 border-accent shadow-lg">
               <div className="flex items-center gap-2 text-primary mb-2">
                 <Sparkles className="w-4 h-4" />
                 <span className="font-bold text-sm">
@@ -210,7 +210,7 @@ function RouteComponent() {
           <Stepper
             value={currentStep}
             orientation="vertical"
-            className="flex-1 mb-6"
+            className="flex-1 mb-4"
           >
             {steps.map((step, index) => (
               <StepperItem
@@ -260,8 +260,8 @@ function RouteComponent() {
           </Stepper>
 
           {/* Progression desktop stylée */}
-          <div className="bg-primary-foreground/95 rounded-xl p-4 border-2 border-accent shadow-lg">
-            <div className="flex justify-between items-center text-primary mb-3">
+          <div className="bg-primary-foreground/95 rounded-xl p-3 border-2 border-accent shadow-lg">
+            <div className="flex justify-between items-center text-primary mb-2">
               <span className="font-bold">Progression</span>
               <div className="flex items-center gap-2">
                 <span className="text-sm bg-accent text-accent-foreground px-3 py-1 rounded-full font-bold">
@@ -278,7 +278,7 @@ function RouteComponent() {
                 }}
               />
             </div>
-            <p className="text-foreground text-xs mt-2 font-medium">
+            <p className="text-foreground text-xs mt-1 font-medium">
               {currentStep + 1} sur {steps.length} étapes complétées
             </p>
           </div>
@@ -288,7 +288,7 @@ function RouteComponent() {
       {/* Contenu principal : Formulaires */}
       <div
         ref={formContentAreaRef}
-        className="form-content-area flex-1 p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 overflow-y-auto flex justify-center bg-card"
+        className="form-content-area flex-1 p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 overflow-y-auto flex justify-center bg-card lg:ml-96"
       >
         <div className="w-full max-w-4xl px-0 sm:px-2">
           {currentStep === 0 && (
