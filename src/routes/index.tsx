@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import {
   Stepper,
@@ -20,6 +20,7 @@ import { photoSchema } from "@/types/profile-image";
 import { z } from "zod";
 import { useSubmitForm } from "@/hooks/use-submit-form";
 import { GraduationCap, Users, Sparkles, ArrowRight } from "lucide-react";
+import { useFormStore } from "@/store/useFormStore";
 
 export const Route = createFileRoute("/")({
   component: RouteComponent,
@@ -27,10 +28,7 @@ export const Route = createFileRoute("/")({
 
 function RouteComponent() {
   const navigate = useNavigate();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<Partial<CompleteFormData>>({
-    annee: "L1", // Valeur par défaut
-  });
+  const { currentStep, formData, setCurrentStep, updateFormData, resetForm } = useFormStore();
   const formContentAreaRef = useRef<HTMLDivElement>(null);
 
   const { mutate: submitForm, isPending: isSubmitting } = useSubmitForm();
@@ -65,19 +63,19 @@ function RouteComponent() {
 
   // Handlers pour la navigation
   const handlePersonalInfoNext = (data: z.infer<typeof personalInfoSchema>) => {
-    setFormData((prev) => ({ ...prev, ...data }));
+    updateFormData(data);
     setCurrentStep(1);
     toast.success("Informations personnelles enregistrées !");
   };
 
   const handleMatchingNext = (data: z.infer<typeof matchingSchema>) => {
-    setFormData((prev) => ({ ...prev, ...data }));
+    updateFormData(data);
     setCurrentStep(2);
     toast.success("Centres d'intérêt enregistrés !");
   };
 
   const handlePreferencesNext = (data: z.infer<typeof preferencesSchema>) => {
-    setFormData((prev) => ({ ...prev, ...data }));
+    updateFormData(data);
     setCurrentStep(3);
     toast.success("Préférences enregistrées !");
   };
@@ -88,6 +86,7 @@ function RouteComponent() {
     submitForm(finalData, {
       onSuccess: () => {
         toast.success("Inscription soumise avec succès !");
+        resetForm(); // Clear localStorage after successful submission
         navigate({ to: "/success", state: { from: "submission" } });
       },
       onError: (error: any) => {
@@ -109,10 +108,15 @@ function RouteComponent() {
 
   // Auto-scroll to top when step changes
   useEffect(() => {
-    if (formContentAreaRef.current) {
-      formContentAreaRef.current.scrollTo({ top: 0, behavior: "smooth" });
-    }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    // Double RAF to ensure layout is fully calculated after complex renders
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (formContentAreaRef.current) {
+          formContentAreaRef.current.scrollTo({ top: 0, behavior: "smooth" });
+        }
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    });
   }, [currentStep]);
 
   return (
