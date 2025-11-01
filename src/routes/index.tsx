@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import {
   Stepper,
@@ -31,6 +31,7 @@ function RouteComponent() {
   const [formData, setFormData] = useState<Partial<CompleteFormData>>({
     annee: "L1", // Valeur par défaut
   });
+  const formContentAreaRef = useRef<HTMLDivElement>(null);
 
   const { mutate: submitForm, isPending: isSubmitting } = useSubmitForm();
 
@@ -108,12 +109,9 @@ function RouteComponent() {
 
   // Auto-scroll to top when step changes
   useEffect(() => {
-    // Scroll the content area itself
-    const contentArea = document.querySelector(".form-content-area");
-    if (contentArea) {
-      contentArea.scrollTo({ top: 0, behavior: "smooth" });
+    if (formContentAreaRef.current) {
+      formContentAreaRef.current.scrollTo({ top: 0, behavior: "smooth" });
     }
-    // Also scroll the window to the top in case it's scrolled
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [currentStep]);
 
@@ -288,7 +286,10 @@ function RouteComponent() {
       </div>
 
       {/* Contenu principal : Formulaires */}
-      <div className="form-content-area flex-1 p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 overflow-y-auto flex justify-center bg-card">
+      <div
+        ref={formContentAreaRef}
+        className="form-content-area flex-1 p-3 xs:p-4 sm:p-5 md:p-6 lg:p-8 overflow-y-auto flex justify-center bg-card"
+      >
         <div className="w-full max-w-4xl px-0 sm:px-2">
           {currentStep === 0 && (
             <PersonalInfoForm
